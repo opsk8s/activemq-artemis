@@ -1,0 +1,38 @@
+
+{{- if .Values.loadbalancer.enabled }}
+
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    # Exclude unready slave nodes from DNS
+    service.alpha.kubernetes.io/tolerate-unready-endpoints: "false"
+    networking.gke.io/load-balancer-type: Internal
+    external-dns.alpha.kubernetes.io/hostname: "{{ .Values.url}}"
+  name: {{ include "artemis.fullname" . }}
+  labels:
+{{ include "artemis.labels.standard" . | indent 4 }}
+spec:
+  ports:
+  - name: http
+    port: 80
+    targetPort: http
+  - name: core
+    port: 61616
+    targetPort: core
+  - name: stomp
+    port: 61613
+    targetPort: stomp
+  - name: amqp
+    port: 5672
+    targetPort: amqp
+  type: LoadBalancer
+  selector:
+    app: {{ template "artemis.name" . }}
+    release: {{ .Release.Name | quote }}
+    component: master
+  sessionAffinity: "ClientIP"
+
+
+
+{{- end }}

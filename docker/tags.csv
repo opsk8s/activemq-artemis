@@ -1,0 +1,5 @@
+Repository,Tag,Base Image,Aliases,Dockerfile
+igorivanovic/activemq-artemis,2.17.0,openjdk:8u322-slim,igorivanovic/activemq-artemis:2.17-latest,Dockerfile-jdk8
+igorivanovic/activemq-artemis,2.18.0,openjdk:8u322-slim,igorivanovic/activemq-artemis:2.18-latest,Dockerfile-jdk8
+igorivanovic/activemq-artemis,2.19.0,openjdk:8u322-slim,igorivanovic/activemq-artemis:2.19-latest,Dockerfile-jdk8
+igorivanovic/activemq-artemis,2.20.0,openjdk:11.0.14-jdk-slim,igorivanovic/activemq-artemis:2.20-latest igorivanovic/activemq-artemis:latest,Dockerfile
