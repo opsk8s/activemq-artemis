@@ -3,7 +3,7 @@ kind: ConfigMap
 metadata:
   name: {{ include "artemis.fullname" . }}-configure-common
   labels:
-  {{ include "artemis.labels.standard" . | indent 4 }}
+{{ include "artemis.labels.standard" . | indent 4 }}
 data:
 
   template-common.xml: |
@@ -68,7 +68,7 @@ data:
             <property key="LOG_INTERNAL_EVENTS" value="true"/>
           </broker-plugin>
         </broker-plugins>
-      </core>  
+      </core>
       <core xmlns="urn:activemq:core" xsi:schemaLocation="urn:activemq:core">
 
         <cluster-user>{{ .Values.artemisUser }}</cluster-user>
@@ -102,7 +102,7 @@ data:
             <static-connectors>
             {{ range $i,$t := until (int .Values.replicas) }}
               {{ range tuple "master" "slave" }}
-                <connector-ref>{{ $fullname }}-{{ . }}-{{ $i }}</connector-ref>
+              <connector-ref>{{ $fullname }}-{{ . }}-{{ $i }}</connector-ref>
               {{ end }}
             {{ end }}
             </static-connectors>
@@ -110,3 +110,4 @@ data:
         </cluster-connections>
       </core>
     </configuration>
+
